@@ -16,6 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  bool notSignedIn = true;
+
   PageController pageController;
   int getPageIndex = 0;
 
@@ -42,7 +44,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return notSignedIn ? Container(
+      alignment: Alignment.center,
+      child: GestureDetector(
+        onTap: (){
+          
+        },
+        child: Image.asset('assets/images/google_signin_button.png', height: 50,)),
+    ): Scaffold(
       body: PageView(
         children: <Widget>[
           TimeLinePage(),
