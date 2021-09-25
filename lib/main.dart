@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
             onTap: (){  
               login();
               if(isSigningIn == false){
-                Navigator.pushReplacement(context, MaterialPageRoute(/
+                Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) => HomePage()
               ));
                }
