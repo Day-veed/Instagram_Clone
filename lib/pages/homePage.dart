@@ -3,6 +3,7 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:socialmedia/pages/notificationsPage.dart';
 import 'package:socialmedia/pages/profilePage.dart';
 import 'package:socialmedia/pages/searchPage.dart';
@@ -15,11 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
 
   bool notSignedIn = true;
 
   PageController pageController;
   int getPageIndex = 0;
+
+  
 
   void initState(){
     super.initState();
@@ -44,14 +48,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return notSignedIn ? Container(
-      alignment: Alignment.center,
-      child: GestureDetector(
-        onTap: (){
-          
-        },
-        child: Image.asset('assets/images/google_signin_button.png', height: 50,)),
-    ): Scaffold(
+
+    
+
+    return Scaffold(
       body: PageView(
         children: <Widget>[
           TimeLinePage(),
