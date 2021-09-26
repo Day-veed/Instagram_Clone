@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             SizedBox(height: 24,),
             GestureDetector(
             onTap: (){  
-              ///login();
+              //login();
               if(isSigningIn == false){
                 Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) => HomePage()
