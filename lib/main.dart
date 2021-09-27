@@ -46,8 +46,8 @@ class MyApp extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
-      body: Container(
-        alignment: Alignment.center,
+      body: ChangeNotifierProvider(
+        create: (context) => GoogleSignInProvider(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
             },
             child: Image.asset('assets/images/google_signin_button.png', height: 65, )),
           ],
-        )
+        ),//
       ),
     )
     //Widget buildLoading() => Center(child: CircularProgressIndicator());
