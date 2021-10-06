@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 
     GoogleSignInAccount user = _googleSignIn.currentUser;
 
-    return MaterialApp(
+    return HomePage();/*MaterialApp(
       title: 'Social Media',
       debugShowCheckedModeBanner: false,
       theme: ThemeData
@@ -73,5 +73,5 @@ class MyApp extends StatelessWidget {
     )
     //Widget buildLoading() => Center(child: CircularProgressIndicator());
     );
-  }
-}
+  }*/
+}}
