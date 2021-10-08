@@ -1,4 +1,30 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:socialmedia/pages/homePage.dart';
+//import 'package:firebase_core/firebase_core.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
+  runApp( MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+       
+        primarySwatch: Colors.grey,
+      ),
+      home: HomePage(),
+    );
+  }
+}
+
+
+/*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -75,3 +101,4 @@ class MyApp extends StatelessWidget {
     );
   }*/
 }}
+*/
