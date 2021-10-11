@@ -15,6 +15,6 @@ class CommentsPageState extends State<CommentsPage> {
 class Comment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('Comment');
+    return Text('Comment/');
   }
 }
