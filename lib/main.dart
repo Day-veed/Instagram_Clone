@@ -13,10 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Outstagram',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-       
+        scaffoldBackgroundColor: Colors.black,
         primarySwatch: Colors.grey,
+        cardColor: Colors.white70,
+        accentColor: Colors.black
       ),
       home: HomePage(),
     );
