@@ -1,4 +1,7 @@
+//import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -46,13 +49,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   controlSignIn(GoogleSignInAccount signInAccount) async {
+    print("its gotten here");
     if(signInAccount != null){
+      print("its not");
       await saveUserInfoToFirestore(); 
       setState(() {
+        print("its gotten to true");
         isSignedIn = true;
       });
     }
     else{
+      print("it is o");
       setState(() {
         isSignedIn = false;
       });
@@ -62,6 +69,7 @@ class _HomePageState extends State<HomePage> {
   saveUserInfoToFirestore() async{
     final GoogleSignInAccount gCurrentUser = gSignIn.currentUser;
     DocumentSnapshot documentSnapshot = await usersReference.doc(gCurrentUser.id).get();
+
 
     if (!documentSnapshot.exists){
       final username = await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccountPage()));
@@ -75,9 +83,13 @@ class _HomePageState extends State<HomePage> {
         "bio": "",
         "timestamp": timestamp,
       });
+      print("here 1");
       documentSnapshot = await usersReference.doc(gCurrentUser.id).get();
+      print("its done");
     }
-    currentUser = User.fromDocument(documentSnapshot);
+    print("here 2");
+    //currentUser = User.fromDocument(documentSnapshot);
+    print("its done too");
   }
 
   loginUser(){
@@ -87,8 +99,6 @@ class _HomePageState extends State<HomePage> {
   logoutUser(){
     gSignIn.signOut();
   }
-
-  bool notSignedIn = true;
 
   void dispose(){
     pageController.dispose();
@@ -176,7 +186,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(isSignedIn){
+    return Scaffold(
+      body: !isSignedIn ? buildSignInScreen():buildHomeScreen()
+    );
+    /*if(isSignedIn){
       return buildHomeScreen();
     }
     else {
@@ -269,3 +282,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }*/
+*/}}
