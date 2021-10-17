@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMi
   }
 
   controlSearching(String str){
-    Future<QuerySnapshot> allUsers = usersReference.where("prfileName", isGreaterThanOrEqualTo: str).get();
+    Future<QuerySnapshot> allUsers = usersReference.where("profileName", isGreaterThanOrEqualTo: str).get();
     setState(() {
       futureSearchResults = allUsers;
     });
@@ -79,8 +79,9 @@ class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMi
         }
 
         List<UserResult> searchUsersResult = [];
-        dataSnapshot.data.documents.forEach((document){
-          User eachUser = User.fromDocument(document);
+        dataSnapshot.data.wi.docs.forEach((doc){
+          User eachUser = User.fromDocument(doc);
+          print(eachUser);
           UserResult userResult = UserResult(eachUser);
           searchUsersResult.add(userResult);
         });
@@ -90,7 +91,7 @@ class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMi
     );
   }
 
-  bool  get wantKeepAlive => true;
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
