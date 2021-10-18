@@ -79,7 +79,7 @@ class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMi
         }
 
         List<UserResult> searchUsersResult = [];
-        dataSnapshot.data.wi.docs.forEach((doc){
+        dataSnapshot.data.docs.forEach((doc){
           User eachUser = User.fromDocument(doc);
           print(eachUser);
           UserResult userResult = UserResult(eachUser);
