@@ -13,9 +13,11 @@ class _UploadPageState extends State<UploadPage> {
   captureImageWithCamera()async{
     Navigator.pop(context);
     PickedFile picked = await ImagePicker().getImage(
-            preferredCameraDevice: CameraDevice.front, 
-            source: ImageSource.camera,
-            maxHeight: 680.0);
+      preferredCameraDevice: CameraDevice.front, 
+      source: ImageSource.camera,
+      maxHeight: 680.0,
+      maxWidth: 970,
+    );
         setState(() {
           this.file = File(picked.path);
         });
@@ -29,17 +31,40 @@ class _UploadPageState extends State<UploadPage> {
     });*/
   }
 
+  pickImageFromGallery() async{
+    Navigator.pop(context);
+    PickedFile picked = await ImagePicker().getImage(
+      //preferredCameraDevice: CameraDevice.front, 
+      source: ImageSource.gallery,);
+      setState(() {
+        this.file = File(picked.path);
+      }
+    );
+  }
+  pop(){
+    Navigator.pop(context);
+  }
+
   takeImage(nContext){
     return showDialog(
       context: nContext, 
       builder: (context){
         return SimpleDialog(
+          backgroundColor: Colors.grey,
           title: Text("New Post", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
           children: <Widget>[
             SimpleDialogOption(
               child: Text("Capture Image With Camera", style: TextStyle(color: Colors.white),),
               onPressed: captureImageWithCamera,
-            )
+            ),
+            SimpleDialogOption(
+              child: Text("Select Image from Gallery", style: TextStyle(color: Colors.white),),
+              onPressed: pickImageFromGallery,
+            ),
+            SimpleDialogOption(
+              child: Text("Cancel", style: TextStyle(color: Colors.white),),
+              onPressed: pop,
+            ),
           ],
         );
       }
