@@ -18,17 +18,9 @@ class _UploadPageState extends State<UploadPage> {
       maxHeight: 680.0,
       maxWidth: 970,
     );
-        setState(() {
-          this.file = File(picked.path);
-        });
-    /*PickedFile  imageFile = await ImagePicker.pickImage(
-      source: ImageSource.camera,
-      maxHeight: 680.0,
-      maxWidth: 970,
-    );
     setState(() {
-      this.file = imageFile;
-    });*/
+      this.file = File(picked.path);
+    });
   }
 
   pickImageFromGallery() async{
