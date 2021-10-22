@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   bool isSignedIn = false;
   PageController pageController;
   int getPageIndex = 0;
+  DocumentSnapshot documentSnapshot;
 
   void initState(){
     super.initState();
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> {
       print("its done");
     }
     print("here 2");
-    //currentUser = User.fromDocument(documentSnapshot);
+    currentUser = User.fromDocument(documentSnapshot);
     print("its done too");
   }
 
@@ -121,7 +122,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           TimeLinePage(),
           SearchPage(),
-          UploadPage(),
+          UploadPage(gCurrentUser: currentUser),
           NotificationsPage(),
           ProfilePage(),
         ],
