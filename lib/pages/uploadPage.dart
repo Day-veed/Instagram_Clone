@@ -1,10 +1,14 @@
+//import 'dart:html';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:socialmedia/models/user.dart';
+import 'package:uuid/uuid.dart';
+import 'package:image/image.dart' as ind;
 
 class UploadPage extends StatefulWidget {
   final User gCurrentUser;
@@ -16,6 +20,8 @@ class UploadPage extends StatefulWidget {
 
 class _UploadPageState extends State<UploadPage> {
   File file;
+  bool uploading = false;
+  String postId = Uuid().v4();
   TextEditingController descriptionTextEditingController = TextEditingController();
   TextEditingController locationTextEditingController = TextEditingController();
 
@@ -108,6 +114,30 @@ class _UploadPageState extends State<UploadPage> {
     locationTextEditingController.text = specificAddress;
   }
 
+  compressingPhoto() async{
+    final tDirectory = await getTemporaryDirectory();
+    final path = tDirectory.path;
+    ind.Image nImageFile = ind.decodeImage(file.readAsBytesSync());
+    final compressedImageFile = File('$path/img_$postId.jpg')..writeAsBytesSync(ind.encodeJpg(nImageFile, quality: 90));
+    setState(() {
+      file = compressedImageFile;
+    });
+  }
+
+  controlUploadSave() async{
+    setState(() {
+      uploading = true;
+    });
+
+    await compressingPhoto();
+
+    String downloadUrl = await uploadPhoto(file);
+  }
+
+  Future<String>uploadPhoto(mImageFile) async{
+    StorageUploadTask storageUploadTask = 
+  }
+
   displayUploadFormScreen(){
     return Scaffold(
       appBar: AppBar(
@@ -116,7 +146,7 @@ class _UploadPageState extends State<UploadPage> {
         title: Text("New Post", style: TextStyle(fontSize: 24.0, color: Colors.white, fontWeight: FontWeight.bold),),
         actions: <Widget>[
           FlatButton(
-            onPressed: ()=> print("tapped"), 
+            onPressed: uploading ? null : () => controlUploadSave(), 
             child: Text("Share", style: TextStyle(color: Colors.lightGreenAccent, fontWeight: FontWeight.bold, fontSize: 16.0),),
           )
         ],
