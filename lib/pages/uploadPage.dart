@@ -1,12 +1,14 @@
 //import 'dart:html';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:socialmedia/models/user.dart';
+import 'package:socialmedia/pages/homePage.dart';
 import 'package:uuid/uuid.dart';
 import 'package:image/image.dart' as ind;
 
@@ -135,7 +137,8 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Future<String>uploadPhoto(mImageFile) async{
-    StorageUploadTask storageUploadTask = 
+    UploadTask storageUploadTask = Reference.child("/post_$postId.jpg").putFile(mImageFile);
+
   }
 
   displayUploadFormScreen(){
