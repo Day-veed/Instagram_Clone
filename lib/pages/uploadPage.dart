@@ -137,7 +137,7 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Future<String>uploadPhoto(mImageFile) async{
-    UploadTask storageUploadTask = Reference.child("/post_$postId.jpg").putFile(mImageFile);
+    UploadTask storageUploadTask = Reference.child("post_$postId.jpg").putFile(mImageFile);
 
   }
 
