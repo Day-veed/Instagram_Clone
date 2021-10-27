@@ -1,4 +1,5 @@
 //import 'dart:html';
+
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -101,7 +102,10 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  removeImage(){
+  clearPostIfo(){
+    locationTextEditingController.clear();
+    descriptionTextEditingController.clear();
+
     setState(() {
       file = null;
     });
@@ -134,18 +138,44 @@ class _UploadPageState extends State<UploadPage> {
     await compressingPhoto();
 
     String downloadUrl = await uploadPhoto(file);
+
+    savePostInfoToFirestore(url: downloadUrl, location: locationTextEditingController.text, description: descriptionTextEditingController.text);
+
+    locationTextEditingController.clear();
+    descriptionTextEditingController.clear();
+
+    setState(() {
+      file = null;
+      uploading = false;
+      postId = Uuid().v4();
+    });
+  }
+
+  savePostInfoToFirestore({String url, String location, String description}){
+    postsReference.doc(widget.gCurrentUser.id).collection("usersPosts").doc(postId).set({
+      "postId": postId,
+      "ownerId": widget.gCurrentUser.id,
+      "timestamp": timestamp,
+      "likes": {},
+      "username": widget.gCurrentUser.username,
+      "description": description,
+      "location": location,
+      "url": url,
+    });
   }
 
   Future<String>uploadPhoto(mImageFile) async{
-    UploadTask storageUploadTask = Reference.child("post_$postId.jpg").putFile(mImageFile);
-
+    UploadTask mStorageUploadTask = storageReference.child("post_$postId.jpg").putFile(mImageFile);
+    TaskSnapshot storageTaskSnapshop = await mStorageUploadTask;
+    String downloadUrl = await storageTaskSnapshop.ref.getDownloadURL();
+    return downloadUrl;
   }
 
   displayUploadFormScreen(){
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        leading:  IconButton(icon: Icon(Icons.arrow_back, color: Colors.white,), onPressed: removeImage,),
+        leading:  IconButton(icon: Icon(Icons.arrow_back, color: Colors.white,), onPressed: clearPostIfo,),
         title: Text("New Post", style: TextStyle(fontSize: 24.0, color: Colors.white, fontWeight: FontWeight.bold),),
         actions: <Widget>[
           FlatButton(
@@ -156,6 +186,7 @@ class _UploadPageState extends State<UploadPage> {
       ),
       body: ListView(
         children: <Widget>[
+          
           Container(
             height: 230.0,
             width: MediaQuery.of(context).size.width * 0.8,
