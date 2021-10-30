@@ -180,7 +180,7 @@ class _UploadPageState extends State<UploadPage> {
         actions: <Widget>[
           FlatButton(
             onPressed: uploading ? null : () => controlUploadSave(), 
-            child: Text("Share.", style: TextStyle(color: Colors.lightGreenAccent, fontWeight: FontWeight.bold, fontSize: 16.0),),
+            child: Text("Share", style: TextStyle(color: Colors.lightGreenAccent, fontWeight: FontWeight.bold, fontSize: 16.0),),
           )
         ],
       ),
