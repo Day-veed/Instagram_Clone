@@ -8,7 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:socialmedia/mod.els/user.dart';
+import 'package:socialmedia/models/user.dart';
 import 'package:socialmedia/pages/homePage.dart';
 import 'package:uuid/uuid.dart';
 import 'package:image/image.dart' as ind;
