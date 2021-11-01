@@ -16,6 +16,7 @@ import 'package:socialmedia/pages/uploadPage.dart';
 final GoogleSignIn gSignIn = GoogleSignIn();
 final usersReference = FirebaseFirestore.instance.collection("users");
 final Reference storageReference = FirebaseStorage.instance.ref().child("Posts Pictures");
+final postsReference = FirebaseFirestore.instance.collection("Post");
 
 final DateTime timestamp = DateTime.now();
 User currentUser;
