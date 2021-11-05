@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:socialmedia/models/user.dart';
 import 'package:socialmedia/pages/homePage.dart';
+import 'package:socialmedia/widgets/progressWidget.dart';
 import 'package:uuid/uuid.dart';
 import 'package:image/image.dart' as ind;
 
@@ -21,7 +22,7 @@ class UploadPage extends StatefulWidget {
   _UploadPageState createState() => _UploadPageState();
 }
 
-class _UploadPageState extends State<UploadPage> {
+class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMixin<UploadPage>{
   File file;
   bool uploading = false;
   String postId = Uuid().v4();
@@ -44,7 +45,7 @@ class _UploadPageState extends State<UploadPage> {
   pickImageFromGallery() async{
     Navigator.pop(context);
     PickedFile picked = await ImagePicker().getImage(
-      //preferredCameraDevice: CameraDevice.front, 
+      ///preferredCameraDevice: CameraDevice.front, 
       source: ImageSource.gallery,);
       setState(() {
         this.file = File(picked.path);
@@ -186,7 +187,7 @@ class _UploadPageState extends State<UploadPage> {
       ),
       body: ListView(
         children: <Widget>[
-          
+          uploading ? linearProgress() : Text(""),
           Container(
             height: 230.0,
             width: MediaQuery.of(context).size.width * 0.8,
@@ -247,6 +248,9 @@ class _UploadPageState extends State<UploadPage> {
       ),
     );
   }
+
+
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
