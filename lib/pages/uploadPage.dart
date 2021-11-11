@@ -45,7 +45,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
   pickImageFromGallery() async{
     Navigator.pop(context);
     PickedFile picked = await ImagePicker().getImage(
-      ///preferredCameraDevice: CameraDevice.front, 
+      //preferredCameraDevice: CameraDevice.front, 
       source: ImageSource.gallery,);
       setState(() {
         this.file = File(picked.path);
@@ -117,7 +117,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
     List<Placemark> placeMarks = await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark mplaceMark = placeMarks[0];
     String completeAddressInfo = '${mplaceMark.subThoroughfare} ${mplaceMark.thoroughfare}, ${mplaceMark.subLocality} ${mplaceMark.locality}, ${mplaceMark.subAdministrativeArea} ${mplaceMark.administrativeArea}, ${mplaceMark.postalCode} ${mplaceMark.country}';
-    String specificAddress = '${mplaceMark.locality}, ${mplaceMark.country}';
+    String specificAddress = '${mplaceMark.subLocality}, ${mplaceMark.locality}, ${mplaceMark.country}';
     locationTextEditingController.text = specificAddress;
   }
 
