@@ -45,7 +45,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
   pickImageFromGallery() async{
     Navigator.pop(context);
     PickedFile picked = await ImagePicker().getImage(
-      //preferredCameraDevice: CameraDevice.front, 
+      ///preferredCameraDevice: CameraDevice.front, 
       source: ImageSource.gallery,);
       setState(() {
         this.file = File(picked.path);
